@@ -1,0 +1,113 @@
+/* Checkout Page Styles */
+main {
+    padding: 20px;
+  }
+  
+  #cart-items {
+    margin-bottom: 20px;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+  }
+  
+  .item-details {
+    flex: 1;
+  }
+  
+  .item-details h3 {
+    margin-top: 0;
+  }
+  
+  .item-details p {
+    margin: 5px 0;
+  }
+  
+  .remove-item button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .remove-item button:hover {
+    background-color: #d32f2f;
+  }
+  
+  #total-cost {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #place-order-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto 20px;
+  }
+  
+  #place-order-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Form Styles */
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  form input[type="text"],
+  form input[type="email"],
+  form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M7 10l5 5 5-5z" /><path d="M0 0h24v24H0z" fill="none" /></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 24px auto;
+  }
+  
+  form button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  form button[type="submit"]:hover {
+    background-color: #45a049;
+  }

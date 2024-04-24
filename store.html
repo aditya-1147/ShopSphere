@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere - Our Stores</title>
+  <link rel="icon" type="image/x-icon" href="./img/topicon.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      width: 100%;
+      height: 800px; 
+    }
+    .city {
+      cursor: pointer;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+    .city:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <nav id="nav">
+            <div class="navTop">
+                <div class="navItem">
+                    <a href="index.html"><img src="./img/logo.png" alt="" class="logo"> </a>
+                </div>
+                <div class="navItem">
+                    <div class="search1">
+                        <input type="text" placeholder="Search..." class="searchInput">
+                        <img src="./img/search.png" width="20" height="20" alt="" class="searchIcon">
+                    </div>
+                </div>
+            </div>
+            <div class="navBottom">
+              <a href="index.html"><h3 class="menuItem">TSHIRTS</h3></a>
+              <a href="index.html"><h3 class="menuItem">SWEATSHIRTS</h3></a>
+              <a href="index.html"><h3 class="menuItem">JACKETS</h3></a>
+              <a href="index.html"><h3 class="menuItem">TROUSERS</h3></a>
+              <a href="index.html"><h3 class="menuItem">CARGOS</h3></a>
+            </div>
+        </nav>
+    </header>
+
+  <h1 style="font-family: 'Times New Roman';">Our Stores</h1>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([20, 77], 5); 
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var storeLocations = {
+      "Mumbai": [19.0760, 72.8777],
+      "Delhi": [28.7041, 77.1025],
+      "Kolkata": [22.5726, 88.3639],
+      "Bangalore": [12.9716, 77.5946],
+      "Chennai": [13.0827, 80.2707]
+    };
+
+    var storeAddresses = {
+    "Mumbai": "123, Hill Road, Bandra West,Mumbai, Maharashtra",
+    "Delhi": "456, Connaught Place, New Delhi,Delhi",
+    "Kolkata": "789, Park Street, Park Circus,Kolkata, West Bengal",
+    "Bangalore": "101, Koramangala 4th Block,Bangalore, Karnataka",
+    "Chennai": "456, Anna Salai, Teynampet,Chennai, Tamil Nadu"
+    };
+
+
+    function showAddress(city) {
+      var address = storeAddresses[city]; 
+      alert(address);
+    }
+
+    for (var city in storeLocations) {
+      var marker = L.marker(storeLocations[city]).addTo(map);
+      marker.bindPopup("<b>" + city + "</b><br>Click to see address").on('click', function(e) {
+        showAddress(e.target._popup._content.split("<b>")[1].split("</b>")[0]);
+      });
+    }
+  </script>
+  <footer>
+    <div class="footerLeft">
+        <div class="footerMenu">
+            <h1 class="fMenuTitle">About Us</h1>
+            <ul class="fList">
+              <a href="about.html" target="_blank"><li class="fListItem">Company</li></a>
+              <a href="contact.html" target="_blank"><li class="fListItem">Contact</li></a>
+              <a href="affiliate.html" target="_blank"><li class="fListItem">Affiliates</li></a>
+              <a href="store.html" target="_blank"><li class="fListItem">Stores</li></a>
+            </ul>
+        </div>
+        <div class="footerMenu">
+            <h1 class="fMenuTitle">Useful Links</h1>
+            <ul class="fList">
+                <li class="fListItem">Support</li>
+                <li class="fListItem">Refund</li>
+                <li class="fListItem">FAQ</li>
+                <li class="fListItem">Feedback</li>
+                <li class="fListItem">Stories</li>
+            </ul>
+        </div>
+        <div class="footerMenu">
+            <h1 class="fMenuTitle">Products</h1>
+            <ul class="fList">
+                <a href="index.html"><li class="fListItem">Tshirts</li></a>
+                <a href="index.html"><li class="fListItem">Sweatshirts</li></a>
+                <a href="index.html"><li class="fListItem">Jackets</li></a>
+                <a href="index.html"><li class="fListItem">Trousers</li></a>
+                <a href="index.html"><li class="fListItem">Cargos</li></a>
+            </ul>
+        </div>
+    </div>
+    <div class="footerRight">
+        <div class="footerRightMenu">
+            <h1 class="fMenuTitle">Subscribe to our newsletter</h1>
+            <div class="fMail">
+                <input type="text" placeholder="your@email.com" class="fInput">
+                <button class="fButton">Join!</button>
+            </div>
+        </div>
+        <div class="footerRightMenu">
+            <h1 class="fMenuTitle">Follow Us</h1>
+            <div class="fIcons">
+                <a href="https://www.facebook.com" target="_blank"><img src="./img/facebook.png" alt="" class="fIcon"></a>
+                <a href="https://twitter.com" target="_blank"><img src="./img/twitter.png" alt="" class="fIcon"></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="./img/instagram.png" alt="" class="fIcon"></a>
+                <a href="https://web.whatsapp.com" target="_blank"><img src="./img/whatsapp.png" alt="" class="fIcon"></a>
+            </div>
+        </div>
+        <div class="footerRightMenu">
+            <span class="copyright">@<b>Shopsphere</b>. All rights reserved. 2024.</span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
