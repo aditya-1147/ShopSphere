@@ -32,13 +32,25 @@
             </div>
         </nav>
     </header>
+
     <div class="order-placed">
         <h1>Thank you for your order!</h1>
         <img src="./img/orderplaced.png" alt="Order Placed" class="order-image">
         <a href="index.html">
             <button>Back to Home</button>
         </a>
+
+        <div class="user-details">
+            <h2>User Details:</h2>
+            <p id="user-name"></p>
+            <p id="user-email"></p>
+            <p id="user-address"></p>
+        </div>
+
+        <!-- Button to download user details -->
+        <button id="download-details-btn">Download Order Details</button>
     </div>
+
     <footer>
         <div class="footerLeft">
             <div class="footerMenu">
@@ -48,7 +60,6 @@
                     <a href="contact.html" target="_blank"><li class="fListItem">Contact</li></a>
                     <a href="affiliate.html" target="_blank"><li class="fListItem">Affiliates</li></a>
                     <a href="store.html" target="_blank"><li class="fListItem">Stores</li></a>
-                </ul>
             </div>
             <div class="footerMenu">
                 <h1 class="fMenuTitle">Useful Links</h1>
@@ -93,5 +104,41 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const orders = JSON.parse(localStorage.getItem("orders"));
+        if (orders && orders.length > 0) {
+            const latestOrder = orders[orders.length - 1];
+            document.getElementById("user-name").textContent = "Name: " + latestOrder.name;
+            document.getElementById("user-email").textContent = "Email: " + latestOrder.email;
+            document.getElementById("user-address").textContent = "Address: " + latestOrder.address;
+        }
+
+        // Add event listener to the download button
+        const downloadButton = document.getElementById("download-details-btn");
+        downloadButton.addEventListener("click", function() {
+            const orders = JSON.parse(localStorage.getItem("orders"));
+            appendUserDetailsToFile(orders);
+        });
+    });
+
+    // Function to download user details as a text file
+    function appendUserDetailsToFile(orders) {
+        let userText = "";
+        orders.forEach(order => {
+            userText += `Name: ${order.name}, Email: ${order.email}, Address: ${order.address}\n`;
+        });
+
+        const blob = new Blob([userText], { type: "text/plain" });
+
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "user_details.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+    </script>
 </body>
 </html>
