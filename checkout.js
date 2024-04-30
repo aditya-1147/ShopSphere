@@ -13,7 +13,6 @@ function renderCartItems() {
 
     const itemImage = document.createElement("img");
 
-
     const itemDetails = document.createElement("div");
     itemDetails.classList.add("item-details");
 
@@ -37,9 +36,7 @@ function renderCartItems() {
     itemDetails.appendChild(itemQuantity);
     itemDetails.appendChild(removeButton);
 
-    cartItem.appendChild(itemImage);
     cartItem.appendChild(itemDetails);
-
     cartItemsContainer.appendChild(cartItem);
 
     totalCost += item.price * item.quantity;
@@ -56,12 +53,35 @@ function removeItemFromCart(index) {
 
 renderCartItems();
 
+function saveUserDetailsToLocalStorage(name, email, address) {
+  const userDetails = {
+    name: name,
+    email: email,
+    address: address
+  };
+  const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+  existingOrders.push(userDetails);
+  localStorage.setItem("orders", JSON.stringify(existingOrders));
+}
+
 checkoutForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const name = document.getElementById("name").value;
+  const nameInput = document.getElementById("name");
   const email = document.getElementById("email").value;
   const address = document.getElementById("address").value;
+
+  const nameRegex = /^[a-zA-Z\s]+$/;
+
+  if (!nameRegex.test(nameInput.value)) {
+    alert("Please enter a valid name (only letters and spaces allowed)");
+    nameInput.focus();
+    return;
+  }
+
+  const name = nameInput.value;
+
+  saveUserDetailsToLocalStorage(name, email, address);
 
   localStorage.removeItem("cart");
   
