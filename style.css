@@ -641,3 +641,16 @@ a{
   width: 80px;
   height: 80px;
 }
+
+.content-wrapper {
+  min-height: calc(100vh - 200px); /* Adjust the value based on your header and footer heights */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Add some padding for spacing */
+}
+
+.order-placed {
+  max-width: 550px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the order-placed div horizontally */
+}
