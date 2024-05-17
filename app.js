@@ -159,3 +159,52 @@ window.addEventListener("load", () => {
     updateCartBadge();
   }
 });
+// app.js or server.js
+
+const express = require('express');
+const fs = require('fs');
+const app = express();
+const port = 3000; // Or any other port you prefer
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Endpoint to handle user data
+app.post('/storeUserData', (req, res) => {
+    const userData = req.body;
+
+    // Append user data to a text file
+    fs.appendFile('userDetails.txt', JSON.stringify(userData) + '\n', (err) => {
+        if (err) {
+            console.error('Error writing to file:', err);
+            res.status(500).send('Error storing user data');
+        } else {
+            console.log('User data stored successfully');
+            res.status(200).send('User data stored successfully');
+        }
+    });
+});
+
+// Create the text file if it doesn't exist
+fs.open('userDetails.txt', 'wx', (err, fd) => {
+    if (err) {
+        if (err.code === 'EEXIST') {
+            console.log('File already exists');
+            return;
+        }
+        console.error('Error creating file:', err);
+        return;
+    }
+    console.log('File created successfully');
+    fs.close(fd, (err) => {
+        if (err) {
+            console.error('Error closing file:', err);
+        }
+    });
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
